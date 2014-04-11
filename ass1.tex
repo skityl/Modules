@@ -1,0 +1,680 @@
+\documentclass[10pt]{article}
+\usepackage{amsmath,amssymb,graphicx,color}
+\title{Modules and Representation Theory Assignment 1}
+\author{Edward McDonald}
+\date{}
+
+\newtheorem{theorem}{Theorem}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+\newenvironment{proof}[1][Proof]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{definition}[1][Definition]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{example}[1][Example]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+\newenvironment{remark}[1][Remark]{\begin{trivlist}
+\item[\hskip \labelsep {\bfseries #1}]}{\end{trivlist}}
+
+\newcommand{\qed}{\nobreak \ifvmode \relax \else
+	      \ifdim\lastskip<1.5em \hskip-\lastskip
+		        \hskip1.5em plus0em minus0.5em \fi \nobreak
+				      \vrule height0.75em width0.5em depth0.25em\fi}
+
+
+\topmargin=-20mm
+\textheight=250mm
+\oddsidemargin=-4mm
+\textwidth=166mm
+
+
+
+
+\parskip=5pt
+\parindent=0pt
+
+\setlength{\parindent}{0pt}
+\usepackage{fullpage}
+\usepackage{enumerate}
+\newcommand{\im}{\operatorname{im}}
+\newcommand{\isom}{\cong}
+\newcommand{\modulo}[1]{\;\operatorname{mod} #1}
+\newcommand{\Char}{\operatorname{char}}
+\newcommand{\tr}{\operatorname{tr}}
+\newcommand{\dist}{\operatorname{dist}_{L^\infty}}
+
+\newcommand{\legendre}[2]{\left(\frac{#1}{#2}\right)}
+
+\newcommand{\Hom}{\operatorname{Hom}}
+\newcommand{\la}{\langle}
+\newcommand{\ra}{\rangle}
+
+\begin{document}
+\section*{Question 1}
+Let $R$ be a ring, and $M$ and $N$ are $R$ modules. $M'$ is an $R$ submodule
+of $M$. $\pi:M\rightarrow M/M'$ is the canonical quotient map.
+\subsection*{Part (a)}
+\begin{theorem}
+    The map $\Psi:\Hom_R(M/M',N)\rightarrow \Hom_R(M,N)$ given by
+    $\Psi(\varphi) = \varphi\circ\pi$ is a homomorphism of abelian groups.
+\end{theorem}
+\begin{proof}
+    The group operation on $\Hom_R(M/M',N)$ is pointwise multiplication: $(\varphi+\psi)(m) = \varphi(m)+\psi(m)$,
+    for $m \in M/M'$.
+    
+    So we simply compute, for $\varphi,\psi \in\Hom_R(M/M',N)$ and $m \in M$
+    \begin{align*}
+        \Psi(\varphi+\psi)(m) &= ((\varphi+\psi)\circ\pi)(m)\\
+        &= \varphi(\pi(m))+\varphi(\pi(m)) \\
+        &= (\varphi\circ\pi)(m)+(\psi\circ\pi)(m)\\
+        &= (\varphi\circ\pi+\psi\circ\pi)(m)\\
+        &= (\Psi(\varphi)+\Psi(\psi))(m).
+    \end{align*}
+    Hence, $\Psi(\varphi+\psi) = \Psi(\varphi)+\Psi(\psi)$. So $\Psi$
+    is a homomorphism of abelian groups. $\Box$
+\end{proof}
+\subsection*{Part (d)}
+\begin{theorem}
+    The kernel of $\Psi$ is trivial. That is, the only
+    $\varphi \in \Hom_R(M/M',N)$ with $\Psi(\varphi) = 0$
+    is $\varphi = 0$. That is, $\Psi$ is injective.
+\end{theorem}
+\begin{proof}
+    Suppose that $\varphi \in \ker\Psi$. Then for all
+    $m \in M$, we have
+    \begin{equation*}
+        \Psi(\varphi)(m) = 0_N.
+    \end{equation*} 
+    Hence,
+    \begin{equation*}
+        \varphi(m+M') = 0_N.
+    \end{equation*}
+    However, this means that for any $m+M' \in M/M'$, $\varphi(m+M') = 0$.
+    So $\varphi$ is identically zero. $\Box$
+\end{proof}
+\subsection*{Part (c)}
+\begin{theorem}
+    The image of $\Psi$ is precisely the set
+    \begin{equation*}
+        \im\Psi = \{ \varphi \in \Hom_R(M,N)\;:\;M'\subset\ker\varphi\;\}
+    \end{equation*}    
+\end{theorem}
+\begin{proof}
+    Let $S = \{ \varphi \in \Hom_R(M,N)\;:\;\ker\varphi\subset M'\;\}$.
+    
+    Let $\Psi(\varphi)\in \im\Psi$. Then if $m \in M'$,
+    \begin{align*}
+        \Psi(\varphi)(m) &= \varphi\circ\pi(m)\\
+        &= \varphi(m+M')\\
+        &= \varphi(M')\\
+        &= \varphi(0_{M/M'})\\
+        &= 0_N.
+    \end{align*}
+    since $M'$ is the identity of the additive group of $M/M'$. Hence $M'\subset\ker\Psi\varphi$ and
+    so $\im\Psi \subset S$.
+    
+    Now suppose that $\varphi \in S$. Consider the function $\psi:M/M'\rightarrow N$
+    given by $\psi(m+M') = \varphi(m)$. This is well defined, since if we choose
+    $m' \in M'$, then $\psi(m+m'+M') = \psi(m)+\psi(m') = \psi(m)$,
+    since $M'\subset \ker\psi$, so $\psi(m') = 0$.
+    
+    Then $\Psi(\psi) = \psi\circ\pi:M\rightarrow N$, and if $m'\in M'$, then
+    $\Psi(\psi)(m) = \psi(m+M') = \psi(M') = 0$.
+    
+    Hence, $\Psi(\psi)\in S$, so $\im\Psi\subseteq S$.
+    
+    Therefore, $\im \Psi = S$. $\Box$
+\end{proof}
+\subsection*{Part (d)}
+\begin{theorem}
+    The finitely generated abelian groups $A$ such that $\Hom_\mathbb{Z}(A,\mathbb{Z}/24\mathbb{Z})$
+    is a group of order $12$
+    are exactly those that can be expressed in the form
+    \begin{equation*}
+        A\isom \mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/2\mathbb{Z}\times\mathbb{Z}/2\mathbb{Z}\times\prod_{i=1}^n\mathbb{Z}/b_i\mathbb{Z}
+    \end{equation*}
+    or
+    \begin{equation*}
+        A\isom \mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/4\mathbb{Z}\times\prod_{i=1}^n\mathbb{Z}/b_i\mathbb{Z}
+    \end{equation*}
+    where the collection $\{b_1,\ldots,b_n\}$ is such that $\gcd(b_i,24) = 1$
+    for $i = 1,\ldots,n$.
+\end{theorem}
+\begin{proof}
+    If $A$ is a finitely generated abelian group, then it can be expressed in the form
+    \begin{equation*}
+        A\equiv \prod_{i=0}^n\mathbb{Z}/a_i\mathbb{Z}
+    \end{equation*}
+    where each $a_i \in \mathbb{Z}$ is either $0$ or a power of a prime.
+    By the universal property of direct sums, we have
+    \begin{equation*}
+        \Hom_\mathbb{Z}(A,\mathbb{Z}/24\mathbb{Z}) \isom \prod_{i=1}^n\Hom_\mathbb{Z}(\mathbb{Z}/a_i\mathbb{Z},\mathbb{Z}/24\mathbb{Z}).
+    \end{equation*}
+    Hence the order of $\Hom_\mathbb{Z}(A,\mathbb{Z}/24\mathbb{Z})$ is exactly
+    \begin{equation*}
+        \prod_{i=1}^n|\Hom_\mathbb{Z}(\mathbb{Z}/a_i\mathbb{Z},\mathbb{Z}/24\mathbb{Z})|.
+    \end{equation*} 
+    By the universal property of quotient modules, we have
+    \begin{equation*}
+        |\Hom_\mathbb{Z}(\mathbb{Z}/a_i\mathbb{Z},\mathbb{Z}/24\mathbb{Z})| = |\{\varphi\in\Hom_\mathbb{Z}(\mathbb{Z},\mathbb{Z}/24\mathbb{Z})\;:\; a_i\mathbb{Z} \subseteq \ker\varphi\;\}|.
+    \end{equation*}
+    We can compute the
+    right hand side by noting that the set $\Hom_\mathbb{Z}(\mathbb{Z},\mathbb{Z}/24\mathbb{Z})$ is exactly
+    a set of multiplication operators, for $x\in \mathbb{Z}$, define $\lambda_x \in\Hom_\mathbb{Z}(\mathbb{Z},\mathbb{Z}/24\mathbb{Z})$
+    by $\lambda_x(n) = nx+24\mathbb{Z}$. 
+    
+    See that $a_i\mathbb{Z}\subseteq\ker\lambda_x$ precisely when $xa_i\in24\mathbb{Z}$.
+    
+    So the possible values of $x$ such that $a_i\mathbb{Z}\subseteq\ker\lambda_x$
+    correspond to solutions of the linear congruence,
+    \begin{equation*}
+        a_i x\equiv 0\modulo{24}.
+    \end{equation*}
+    The number of solutions is given by $\gcd(a_i,24)$. Hence,
+    \begin{equation*}
+        |\Hom_\mathbb{Z}(\mathbb{Z}/a_i\mathbb{Z},\mathbb{Z}/24\mathbb{Z})| = \gcd(a_i,24).
+    \end{equation*}
+    
+    So we have
+    \begin{equation*}
+        |\Hom_\mathbb{Z}(A,\mathbb{Z}/24\mathbb{Z})| = \prod_{i=1}^n \gcd(a_i,24).
+    \end{equation*}
+    
+    So we wish to find choices for the set $\{a_1,a_2,\ldots,a_n\}$ such that
+    \begin{equation*}
+        \prod_{i=1}^n \gcd(a_i, 24) = 12.
+    \end{equation*}
+    We cannot have $a_i = 0$ for any $i$, since $\gcd(0,24) = 24$. 
+    
+    The only possible cases for $\gcd(a_i,24) \neq 1$ are when $a_i|24$, since
+    by assumption $a_i$ is a power of a prime. Hence we can have $a_i = 2,4,8,3$.
+    
+    Since $3|12$, we must have $a_i = 3$ for some $i$. Reorder the set $\{a_1,\ldots,a_n\}$
+    if necessary so that $a_1 = 3$.
+    
+    Now we require
+    \begin{equation*}
+        \prod_{i=2}^n \gcd(a_i,24) = 4.
+    \end{equation*}
+    So we cannot have $a_i = 8$. The only possible cases
+    are $a_i = 4$ for some $i \geq 2$ and $\gcd(a_i,24) = 1$
+    otherwise, or we have $a_i = 2$ and $a_j = 2$ for some distinct $i$ and $j$.
+    
+    Reorder indices if necessary so that the two possible cases are $a_2 = 4$
+    or $a_2 = 2$ and $a_3 = 2$. Then we have two possible 
+    decompositions for $A$,
+    \begin{align*}
+                A &\isom \mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/2\mathbb{Z}\times\mathbb{Z}/2\mathbb{Z}\times\prod_{i=3}^n\mathbb{Z}/a_i\mathbb{Z}\\
+                A &\isom \mathbb{Z}/3\mathbb{Z}\times\mathbb{Z}/4\mathbb{Z}\times\prod_{i=4}^n\mathbb{Z}/a_i\mathbb{Z}
+    \end{align*}
+    with $\gcd(a_i,24) = 1$ for $i\geq 3$ in the first case and $\gcd(a_i,24) = 1$ for $i\geq 4$
+    in the second case. Thus the required result follows. $\Box$   
+\end{proof}
+\section*{Question 2}
+For this question, we consider the quaternion group,
+\begin{equation*}
+    Q = \langle i,j\;|\;i^4 = 1,j^2 = i^2,ji = i^3j\;\rangle
+\end{equation*}
+and the associated real group algebra $\mathbb{R}Q$.
+\begin{lemma}
+    $\mathbb{R}Q \isom \frac{\mathbb{R}\langle i,j\rangle}{\langle i^4-1,j^2-i^2,ji-i^3j\rangle}$
+\end{lemma}
+\begin{proof}
+    Let $I = \langle i^4-1,j^2-i^2,ji-i^3j\rangle \lhd \mathbb{R}\langle i,j\rangle$. 
+    
+    By the universal property of free algebras, there is a unique $\mathbb{R}$-algebra
+    homomorphism 
+    \begin{equation*}
+        \psi:\mathbb{R}\langle i,j\rangle \rightarrow \mathbb{R}Q
+    \end{equation*}
+    satisfying $\psi(i) = i$ and $\psi(j) = j$. 
+    
+    Since $\psi$ is an algebra homomorphism, we have $\psi(1) = 1$,
+    and since $\mathbb{R}Q$ is generated by $i$,$j$ and $1$ 
+    $\psi$ is a surjection.
+    
+    See that
+    \begin{align*}
+        \psi(i^4-1) &= i^4-1 = 0\\
+        \psi(j^2-i^2) &= j^2-i^2 = 0\\
+        \psi(ji-i^3j) &= ji-i^3j = 0
+    \end{align*}
+    Hence, $I\subseteq \ker\psi$. By the universal property of quotient modules,
+    there is an isomorphism of abelian groups
+    \begin{equation*}
+        \Hom_\mathbb{R}(\mathbb{R}\langle i,j\rangle/I,\mathbb{R}Q) \isom \{\varphi\in\Hom_\mathbb{R}(\mathbb{R}\langle i,j\rangle,\mathbb{R}Q)\;:\;I\subseteq \ker\varphi\}
+    \end{equation*}
+    The map $\psi$ is in the left hand side of the above isomorphism. Hence, there is a corresponding
+    $\varphi\in\Hom(\mathbb{R}\langle i,j\rangle,\mathbb{R}Q)$ so that $\psi = \varphi\circ\pi$,
+    where $\pi$ is the canonical projection $\mathbb{R}\langle i,j\rangle \rightarrow \mathbb{R}\langle i,j\rangle/I$.
+    
+    Since $\psi$ is a surjection, and $\psi = \varphi\circ\pi$, $\varphi$
+    must also be a surjection.
+    
+    Now we estimate the dimension of $\mathbb{R}\langle i,j\rangle/I$. Each
+    element of this algebra is an $\mathbb{R}$-linear combination of terms of the form
+    \begin{equation*}
+        i^{n_1}j^{n_2}i^{n_3}\cdots j^{n_k}
+    \end{equation*}
+    for some choice of non-negative integers $\{n_1,\ldots,n_k\}$.
+    
+    Since we work modulo the ideal $I$, we can use the relationship $ji = i^3j$
+    to reduce this to
+    \begin{equation*}
+        i_{n_1}j^{n_2}
+    \end{equation*}
+    for some non-
+    negative integers $n_1$ and $n_2$. Since $i^4 = 1$ and $j^2 = i^2$,
+    we can reduce this to $n_1\in \{0,1,2,3\}$ and $n_2\in {0,1}$.
+    
+    Hence, there are at most $8$ possible linearly independent terms of the form
+    $i^{n_1}j^{n_2}$. Since these terms span $\mathbb{R}\langle i,j\rangle/I$, 
+    the dimension of $\mathbb{R}\langle i,j\rangle/I$ must be less than or equal
+    to $8$.
+    
+    The algebra $A = \mathbb{R}Q$ is $8$ dimensional since $Q$ is a group
+    of order $8$.
+    
+    Hence the map $\varphi$ is a surjective linear map
+    from a vector space of at most dimension $8$ to a vector
+    space of dimension $8$.
+    
+    Hence, $\varphi$ is injective and is thus an isomorphism
+    of $\mathbb{R}$-algebras. $\Box$
+\end{proof}
+\section*{Part (a)}
+Let $G = (\mathbb{Z}/2\mathbb{Z})^2$. Now we consider the group
+algebra $\mathbb{R}G$.
+\begin{theorem}
+    $\mathbb{R}G \isom \frac{\mathbb{R}\langle i,j\rangle}{\langle i^2-1,j^2-1,ij-ji\rangle}$
+\end{theorem}
+\begin{proof}
+    The group $G$ has two generators, label
+    them $i$ and $j$ so that $G = \{1,i,j,ij\}$
+    and $i^2 = 1$, $j^2 = 1$ where $1$ is the group identity.
+    
+    Define the ideal $J = \langle i^2-1,j^2-1,ij-ji\rangle \lhd \mathbb{R}\langle i,j\rangle$.
+    
+    By the universal property of free algebras,
+    there is a unique $\mathbb{R}$-algebra homomorphism
+    \begin{equation*}
+        \psi:\mathbb{R}\langle i,j\rangle\rightarrow \mathbb{R}G
+    \end{equation*}
+    such that $\psi(i) = i$ and $\psi(j) = j$. 
+    
+    Since $1$, $i$ and $j$ generate the algebra $\mathbb{R}G$, 
+    $\psi$ is surjective.
+    
+    Since we have the relationships,
+    \begin{align*}
+        \psi(i^2-1) &= i^2-1 = 0\\
+        \psi(j^2-1) &= j^2-1 = 0\\
+        \psi(ij-ji) &= ij-ji = 0
+    \end{align*}
+    we have $J\subseteq \ker\psi$.
+    
+    Now by the universal property of quotient modules, there is an isomorphism
+    of abelian groups
+    \begin{equation*}
+        \{\varphi \in \Hom_\mathbb{R}(\mathbb{R}\langle i,j\rangle,\mathbb{R}G)
+        \;:\;I\subseteq \ker\varphi\;\} \isom \Hom_\mathbb{R}(\mathbb{R}\langle i,j\rangle/J,\mathbb{R}G).
+    \end{equation*}
+    Note that $\psi$ is in the left hand side of this isomorphism. Hence, there is a corresponding
+    $\varphi \in \Hom_\mathbb{R}(\mathbb{R}\langle i,j\rangle,\mathbb{R}G)$
+    so that $\psi = \varphi\circ\pi$.
+    
+    Since $\psi$ is surjective, $\varphi$ is surjective.
+    
+    Now we estimate the dimension of $\mathbb{R}\langle i,j\rangle/J$. Each element
+    in this algebra is an $\mathbb{R}$-linear combination
+    of terms of the form
+    \begin{equation*}
+        i^{n_1}j^{n_2}i^{n_3}\cdots j^{n_k}
+    \end{equation*}
+    for some choice of non-negative integers $\{n_1,\ldots,n_k\}$.
+    Since we have the relationship $ij = ji$, we can reduce this to
+    \begin{equation*}
+        i^{n_1}j^{n^2}
+    \end{equation*}
+    for some non-negative integers $n_1$ and $n_2$. 
+    Since $i^2 = j^2 = 1$, we need only consider $n_1,n_2\in\{0,1\}$.
+    Hence there are at most four distinct terms of the form
+    $i^{n_1}j^{n_k}$.
+    
+    Since terms of these form span $\mathbb{R}\langle i,j\rangle/J$,
+    we have at most four linearly independnt terms in $\mathbb{R}\langle i,j\rangle/J$.
+    
+    So the dimension of $\mathbb{R}\langle i,j\rangle/J$ is at most $4$.
+    
+    However, since the order of $G$ is $4$, the dimension of $\mathbb{R}G$ is $4$.
+    
+    Hence $\varphi$ is a surjective linear map between a vector space
+    of dimension $4$ and a vector space of dimension $4$. So $\varphi$
+    must be bijective.
+    
+    Hence $\varphi$ is an isomorphism of $\mathbb{R}$-algebras. $\Box$
+\end{proof} 
+\begin{theorem}
+    $\mathbb{R}/\langle i^2-1\rangle \isom \mathbb{R}G$.
+\end{theorem}
+\begin{proof}
+    The ideal $\langle i^2-1\rangle$ of $A$
+    corresponds to the ideal $\langle i^2-1\rangle+I/I$
+    of $\mathbb{R}\langle i,j\rangle/I$. Hence it is sufficient to prove that
+    \begin{equation*}
+        \frac{\mathbb{R}\langle i,j\rangle/I}{(\langle i^2-1\rangle+I)/I}\isom \frac{\mathbb{R}\langle i,j\rangle}{J}.
+    \end{equation*}
+    By the second isomorphism theorem, the left hand side is isomorphic to
+    \begin{equation*}
+        \frac{\mathbb{R}\langle i,j\rangle}{\langle i^2-1\rangle+I}.
+    \end{equation*}
+    Hence it is sufficient to prove that $J = \langle i^2-1\rangle+I$.
+    That is, we must prove that
+    \begin{equation*}
+        \langle i^2-1,j^2-1,ij-ji\rangle = \langle i^2-1\rangle+\langle i^4-1,ji-i^3j,i^2-j^2\rangle.
+    \end{equation*}
+    Clearly $i^2-1 \in \langle i^2-1\rangle+\langle i^4-1,ji-i^3j,i^2-j^2\rangle$. 
+    
+    Since we have
+    \begin{align*}
+        j^2-1 &= (j^2-i^2)+(i^2-1)\\
+        ij-ji &= -(ji - i^3j) +(1-i^2)ij
+    \end{align*}    
+    The inclusion $\langle i^2-1,j^2-1,ij-ji\rangle \subseteq \langle i^2-1\rangle+\langle i^4-1,ji-i^3j,i^2-j^2\rangle$
+    follows.
+    
+    Now we prove the reverse inclusion. Clearly we have $i^2-1\in \langle i^2-1,j^2-1,ij-ji\rangle$,
+    and we have the following identities:
+    \begin{align*}
+        i^4-1 &= (i^2-1)(i^2+1)\\
+        ji-i^3j &= (ji-ij)+(1-i^2)ij\\
+        i^2-j^2 &= (i^2-1)-(j^2-1)
+    \end{align*}
+    Hence $\langle i^4-1,ji-i^3j,i^2-j^2\rangle \subseteq \langle i^2-1,j^2-1,ij-ji\rangle$,
+    and also since $\langle i^2-1\rangle \subseteq \langle i^2-1,j^2-1,ij-ji\rangle$.
+    we have $\langle i^2-1\rangle+\langle i^4-1,ji-i^3j,i^2-j^2\rangle\subseteq \langle i^2-1,j^2-1,ij-ji\rangle$.
+    
+    So we have proven the required equality. $\Box$   
+    
+\end{proof} 
+\subsection*{Part (b)}
+Now we define the quaternion algebra,
+\begin{equation*}
+    \mathbb{H} = \frac{\mathbb{R}\langle i,j\rangle}{\langle i^2+1,j^2+1,ij+ji\rangle}
+\end{equation*}
+\begin{theorem}
+    $A/\langle i^2+1\rangle \isom \mathbb{H}$
+\end{theorem}
+\begin{proof}
+    Again we use the isomorphism $A \isom \mathbb{R}\langle i,j\rangle/I$. 
+    The ideal $\langle i^2+1\rangle \lhd A$ corresponds
+    to $\langle i^2+1\rangle+I/I$. So it is sufficient to prove that
+    \begin{equation*}
+        \frac{\mathbb{R}\langle i,j\rangle/I}{(\langle i^2+1\rangle+I)/I}\isom \frac{\mathbb{R}\langle i,j\rangle}{\langle i^2+1,j^2+1,ij+ji\rangle}.
+    \end{equation*}
+    By the second isomorphism theorem, this is equivalent to proving that
+    \begin{equation*}
+        \frac{\mathbb{R}\langle i,j\rangle}{\langle i^2+1\rangle+I}\isom \frac{\mathbb{R}\langle i,j\rangle}{\langle i^2+1,j^2+1,ij+ji\rangle}.
+    \end{equation*}
+    Hence is it required to prove that
+    \begin{equation*}
+        \langle i^2+1\rangle+I = \langle i^2+1,j^2+1,ij+ji\rangle.
+    \end{equation*}
+    That is, we must prove
+    \begin{equation*}
+        \langle i^2+1\rangle +\langle i^4-1,ji-i^3j,j^2-i^2\rangle = \langle i^2+1,j^2+1,ji+ij\rangle.
+    \end{equation*}
+    
+    Firstly, it is clear that $i^2+1\in \langle i^2+1\rangle +\langle i^4-1,ji-i^3j,j^2-i^2\rangle$. 
+    
+    We also have the following relations,
+    \begin{align*}
+        j^2+1 &= (j^2-i^2)+(i^2+1)\\
+        ji+ij &= ji-i^3j+(i^2+1)ij
+    \end{align*}
+    Hence, $\langle i^2+1,j^2+1,ji+ij\rangle \subseteq \langle i^2+1\rangle +\langle i^4-1,ji-i^3j,j^2-i^2\rangle$. 
+    
+    Now we wish to prove the opposite inclusion. Clearly $i^2+1\in \langle i^2+1,j^2+1,ji+ij\rangle$.
+    
+    We have the following identities:
+    \begin{align*}
+        i^4-1 &= (i^2-1)(i^2+1)\\
+        ji-i^3j &= ji+ij-(i^2+1)ij\\        
+        j^2-i^2 &= (j^2+1)-(i^2+1).
+    \end{align*}
+    Hence we have $\langle i^2+1\rangle +\langle i^4-1,ji-i^3j,j^2-i^2\rangle = \langle i^2+1,j^2+1,ji+ij\rangle$, as required.
+    
+    So the result follows. $\Box$ 
+\end{proof}
+    
+\subsection*{Part (c)}
+\begin{lemma}
+    Suppose that $R$ is a ring and $I\unlhd R$ is a two sided ideal.
+    $R/I$ is both a left and right $R$ module, and also
+    both a left $R/I$ module and a right $R/I$ module.
+    
+    The $R$ submodules of 
+    $R/I$ are exactly the $R/I$ submodules of $R/I$.
+\end{lemma}
+\begin{proof}
+    Consider first $R/I$ as a left $R$ module.
+    Suppose that $M$ is an $R$ submodule of $R/I$. Let $r \in R$, then
+    $(r+I)M = rM \in M$. Hence $M$ is an $R/I$ submodule of $R/I$. 
+    Similarly, if $R/I$ is considered as a right $R$ module
+    then any $R$-submodule of $R/I$ is an $R/I$ submodule of $R/I$ considered
+    as a right $R/I$ submodule.
+    
+    Conversely, suppose that $N$ is an $R/I$ submodule of $R/I$, considered
+    as a left $R/I$-module. Then let $r \in R$.
+    Then we have $rM = (r+I)M$ since $IM\subseteq M$. Hence $rM \in M$, and 
+    so $M$ is an $R$-submodule of $R/I$. Similarly, if we considered
+    $R/I$ as a right $R/I$-module, then $R/I$ submodules of $R/I$
+    are $R$ submodules of $R/I$ considered as a right $R$ module. $\Box$    
+    
+\end{proof}
+
+\begin{theorem}
+    $A/\langle i^2+1\rangle$ is indecomposable as an $A$ module.
+\end{theorem}
+\begin{proof}
+    We wish to prove that $A/\langle i^2+1\rangle$ has no nontrivial $A$-submodules.
+    It is sufficient to prove that $A/\langle i^2+1\rangle$ has no nontrivial $A/\langle i^2+1\rangle$
+    submodules. 
+    
+    However, since $A/\langle i^2+1\rangle \isom \mathbb{H}$, we need only prove
+    that $\mathbb{H}$
+    has no nontrivial ideals.
+    
+    Indeed, since $\mathbb{H}$ is a division ring, if $I\unlhd \mathbb{H}$
+    is a nonzero ideal with $a \in I$, then $1 = aa^{-1} \in I$, and so $I = \mathbb{H}$.
+    
+    Hence $\mathbb{H}$ has no nontrivial ideals and so $A/\langle i^2+1\rangle$ is indecomposible.    
+\end{proof}
+\subsection*{Part (d)}
+\begin{theorem}
+    $A/\langle i^2-1\rangle$ is decomposible as an $A$-module.
+\end{theorem}
+\begin{proof}
+    We may write $A/\la i^2-1\ra$ as $\mathbb{R}G$.
+    It is required to find two $A$-submodules of $A/\la i^2-1\ra$
+    which span $A/\la i^2-1\ra$ and have trivial intersection. 
+    
+    It is sufficient to find two ideals $S$ and $T$ of $R\mathbb{G}$
+    such that $\mathbb{R}G = S+T$, and $S\cap T = \{0\}$.
+    
+    Consider
+    \begin{align*}
+        S &= \la i+j\ra\\
+        T &= \la i-j\ra
+    \end{align*}
+    It is easy to see that $S+T = \mathbb{R}G$, since
+    \begin{equation*}
+        \frac{1}{2}[i(i+j)+i(i-j)] = 1.
+    \end{equation*}
+    Now we need to show that $S\cap T = \{0\}$. Suppose
+    that there are $p,q\in \mathbb{R}G$ such that
+    \begin{equation*}
+        p(i-j) = q(i+j)
+    \end{equation*}
+    Since $\mathbb{R}G$ is spanned by the elements of $G$, write $p = p_0 +p_1i+p_2j+p_3ij$
+    and $q = q_0+q_1i+q_2j+q_3ij$. Then we have
+    \begin{equation*}
+        (p_0 +p_1i+p_2j+p_3ij)(i-j) = (q_0 +q_1i+q_2j+q_3ij)(i+j)
+    \end{equation*} 
+    Expanding this out,
+    \begin{equation*}
+        (p_1-p_2)+(p_0-p_3)i+(-p_0+p_3)j+(p_2-p_1)ij = (q_1+q_2)+(q_0+q_3)i+(q_0+q_3)j+(q_1+q_2)ij
+    \end{equation*}
+    Hence by comparing coefficients, we have
+    \begin{align*}
+        p_1-p_2 &= q_1+q_2\\
+        p_0-p_3 &= q_0+q_3\\
+        -p_0+p_3 &= q_0+q_3\\
+        p_2-p_1 &= q_1+q_2.
+    \end{align*}
+    Hence $p_1 = p_2$ and $p_0 = p_3$, so we can write $p = a+bi+bj+aij$
+    for some $a,b\in \mathbb{R}$. 
+    
+    Now, 
+    \begin{align*}
+        p(i-j) &= (a+bi+bj+aij)(i-j)\\
+        &= 0.
+    \end{align*}
+    So therefore, $S\cap T = \{0\}$. $\Box$
+    
+    
+\end{proof}
+
+\section*{Question 3}
+    For this question $k$ is a field, and $R$ denotes
+    the subring of $k[x]$ given by
+    \begin{equation*}
+        R = \{p(x)\in k[x]\;:\;p'(0) = 0\;\}.
+    \end{equation*}
+\subsection*{Part (a)}
+    \begin{theorem}
+        The $R$-module $k[x]/R$ is $1$-dimensional as a vector space
+        over $k$, and cyclic as an $R$-module.
+    \end{theorem}
+    \begin{proof}
+        Consider the $k$-linear map $\varphi:k[x]\rightarrow k$
+        given by $p(x)\mapsto p'(0)$. The image of $\varphi$
+        is $k$, since for any $\lambda \in $k, $\varphi(\lambda x) = \lambda$,
+        and the kernel of $\varphi$ is precisely $R$. Hence, we have an isomorphism
+        of $k$-vector spaces,
+        \begin{equation*}
+            k[x]/R \isom k
+        \end{equation*}
+        by the first isomorphism theorem. Thus, $k[x]/R$ is a $1$
+        dimensional vector space over $k$.
+        
+        Hence, $k[x]/R = km$, for some $m \in k[x]/R$. For $p(x) \in R$,
+        we have $p(x)m = \lambda m$ for some $\lambda \in k$. 
+        Hence $m$ is a generator for $k[x]/R$ considered
+        as an $R$ module, and so $k[x]/R$ is cyclic. $\Box$
+    \end{proof}
+    
+\subsection*{Part (b)}
+    \begin{theorem}
+        The element $x+R \in k[x]/R$ is a generator
+        for $k[x]/R$ as an $R$-module. Hence, 
+        $k[x]/R \isom R/I$, where $I$
+        is the ideal of $R$ given by
+        \begin{equation*}
+            I = \{p(x)\in k[x]\;\:p(0) = p'(0) = 0\;\}.
+        \end{equation*}        
+    \end{theorem}
+    \begin{proof}
+        Let $p(x)+R \in k[x]/R$. Write $p(x)$ as 
+        \begin{equation*}
+            p(x) = p_0+p_1 x+p_2 x^2+\cdots+p_n x^n
+        \end{equation*}
+        Then since
+        \begin{equation*}
+            p_0+p_2 x^2+p_3 x^3+\cdots+p_n x^n \in R,
+        \end{equation*}
+        we have $p(x)+R = p_1 x+R$. Hence any element 
+        of $k[x]/R$ can be written as $\lambda x+R$ for some $\lambda \in k$.
+        
+        That is,
+        \begin{equation*}
+            k[x]/R = k(x+R).
+        \end{equation*}
+        Hence $x+R$ is a generator for $k[x]/R$. So we can define
+        a surjective $R$-module homomorphism,
+        
+        \begin{equation*}
+            \varphi:R\rightarrow k[x]/R
+        \end{equation*}
+        given by $\varphi(p(x)) = p(x)(x+R)$.
+        
+        The kernel of this map is
+        \begin{equation*}
+            \ker\varphi = \{p(x) \in R\;:\;xp(x)\in R\}
+        \end{equation*}
+        We can determine when $xp(x)$ is in $R$ by differentiating,
+        so $xp(x) \in R$ when $xp'(x) + p(x) = 0$ when $x = 0$.
+        Hence,
+        \begin{equation*}
+            \ker\varphi = \{p(x) \in k[x]\;:\;p'(0) = 0, p(0) = 0\}.
+        \end{equation*}
+        
+        So by the first isomorphism theorem we have an isomorphism of $R$-modules,
+        \begin{equation*}
+            R/I \isom k[x]/R
+        \end{equation*}
+        where $I = \{p(x) \in k[x]\;:\;p(0) = p'(0) = 0\;\}$. $\Box$    
+    \end{proof}
+    \subsection*{Part (c)}
+    \begin{theorem}
+        The ideal $I = \{p(x) \in R\;:\;p(0) = 0\}$
+        is generated by $x^2$ and $x^3$, $I = \langle x^2,x^3\rangle$.
+    \end{theorem}
+    \begin{proof}
+        Suppose that $p(x) \in I$. Then $p(x)$ can be written in the form
+        \begin{equation*}
+            p(x) = p_2 x^2+p_3x^3+\cdots+p_nx^n
+        \end{equation*}
+        since by assumption, $p(0) = p'(0) = 0$.
+        
+        Each term in $p(x)$ can therefore be written as $\alpha x^r$, for $r \geq 2$
+        and $\alpha  \in k$. If $r$ is even, then write $\alpha x^r = x^2(\alpha x^{r-2})$.
+        Then since $r$ is even, $\alpha x^{r-2} \in R$. Hence, $\alpha x^r \in \langle x^2,x^3\rangle$.
+        
+        If $r$ is odd, write $\alpha x^r = x^3\alpha x^{r-3}$. Since $r$ is odd, $r-3$ is even
+        and so $\alpha x^{r-2} \in R$. Hence $\alpha x^r \in \langle x^2,x^3\rangle$.
+        
+        Thus, every term in $p(x)$ is in $\langle x^2, x^3\rangle$ and so $p(x) \in \langle x^2, x^3\rangle$.
+        
+        Since every polynomial in $\langle x^2, x^3\rangle$ has degree at least $2$, we
+        see that $\langle x^2, x^3\rangle \subseteq I$.
+        
+        Hence, $I = \langle x^2,x^3\rangle$.
+    \end{proof}
+        
+    \begin{corollary}
+        $I = \{p(x)\in R\;:\;p(0) = 0\;\} \lhd R$ can be generated by no fewer
+        than $2$ elements.
+    \end{corollary}
+    \begin{proof}
+        Suppose that $I = \langle q(x)\rangle$, that is suppose that $I$ is generated
+        by a single polynomial $q$. Since $x^2 \in I$, we must have $q(x)|x^2$.
+        
+        We must have $q(x) = x^2r(x)$ for some $r \in k[x]$. Thus
+        in $k[x]$, $q(x)|x^2$ and $x^2|q(x)$, so $q(x) = \alpha x^2$ for some $\alpha \in k$.
+        
+        However, $x^3 \in I$. However no polynomial in $x^2R$ has degree $3$, since 
+        for any $s(x) = s_0+s_2x^2+\cdots+s_nx^n\in R$, we have $x^2s(x) = s_0x^2+s_2x^4+\cdots+s_nx^{n+2}$.
+        
+        Therefore, $x^3 \notin \langle q(x)\rangle$. 
+        
+        Hence $I$ can not have a single generator. $\Box$
+    \end{proof}
+\subsection*{Part (c)}
+    The ideal $I\unlhd R$ is not principal, so $R$ cannot be a principal ideal domain.
+
+    
+    
+\end{document}
+
