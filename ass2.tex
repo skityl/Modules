@@ -12,6 +12,9 @@
 
 \setlength\parindent{0pt}
 
+\newcommand{\Ft}{\mathbb{F}_3}
+\newcommand{\isom}{\cong}
+
 \unswtitle{}
     
 \section*{Question 1}
@@ -27,7 +30,56 @@ Let $R = \Rl[x]$.
     \end{equation*}
 \end{lemma}
 \begin{proof}
-    
+    We consider the matrix
+    \begin{equation*}
+        \begin{pmatrix}
+            x+x^2 & 2x+x^2\\
+            2x+x^2 & 4x+x^2
+        \end{pmatrix}
+    \end{equation*}
+    This is simply
+    \begin{equation*}
+        x\begin{pmatrix}
+            1+x & 2+x\\
+            2+x & 4+x
+        \end{pmatrix}
+    \end{equation*}
+    Subtracting twice the first row from the second, this becomes
+    \begin{equation*}
+        x\begin{pmatrix}
+            1+x & 2+x\\
+            1 & 2
+        \end{pmatrix}.
+    \end{equation*}
+    Now subtract $(1+x)$ times the second row from the first,
+    \begin{equation*}
+        x\begin{pmatrix}
+            0 & -x\\
+            1 & 2
+        \end{pmatrix}.
+    \end{equation*}
+    Now subtract the twice the first column from the second, and we obtain
+    \begin{equation*}
+        \begin{pmatrix}
+            0 & -x^2\\
+            x & 0
+        \end{pmatrix}.
+    \end{equation*}
+    Hence, the image of the matrix
+    \begin{equation*}
+    \begin{pmatrix}
+        x & 0\\
+        0 & -x^2
+    \end{pmatrix}
+    \end{equation*}
+    generates a submodule $N$, such that
+    \begin{equation*}
+        R^2/K \isom R^2/N.
+    \end{equation*}
+    Hence,
+    \begin{equation*}
+        R^2/K \isom \frac{R^2}{Rx\oplus Rx^2} \isom R/\langle x\rangle \oplus R/\langle x^2\rangle.
+    \end{equation*}
 \end{proof}
     
 \begin{proposition}
@@ -48,12 +100,80 @@ Let $R = \Rl[x]$.
             p_2(x) & p_4(x)
         \end{pmatrix}
     \end{equation*}
-    Then if $d = 0$, then $R^2/N$ is infinite dimensional as a real vector space. Otherwise,
+    Then $R^2/N$ is infinite dimensional as a real vector space if and only if $d(x) = 0$. Otherwise,
     \begin{equation*}
         \dim(R^2/N) = \deg d(x).
     \end{equation*}
 \end{proposition}
-
+\begin{proof}
+    There exist matrices $\Phi_l$ and $\Phi_r$ in $M_n(R)$ such that
+    \begin{equation*}
+        \Phi_l\begin{pmatrix}
+            p_1(x) & p_3(x)\\
+            p_2(x) & p_4(x)
+        \end{pmatrix}\Phi_r = \begin{pmatrix}
+            q_1(x) & 0\\
+            0 & q_2(x)
+        \end{pmatrix}
+    \end{equation*}
+    where $\det(\Phi_l) = \det(\Phi_r) = 1$ and $q_1|q_2$. So,
+    \begin{equation*}
+        d(x) = \det\begin{pmatrix}
+            p_1(x) & p_3(x)\\
+            p_2(x) & p_4(x)
+        \end{pmatrix} = q_1(x)q_2(x)
+    \end{equation*}
+    and
+    \begin{equation*}
+        R^2/N \isom \frac{R^2}{Rq_1(x)\oplus Rq_2(x)} \isom R/\langle q_1(x)\rangle \oplus R/\langle q_2(x)\rangle.
+    \end{equation*}
     
+    If $d(x) = 0$, then $q_1(x) = 0$ or $q_2(x) = 0$. Hence, in the case
+    $d(x) = 0$, $R^2/N \isom R\oplus R/\langle q_2(x)\rangle$ or $R^2/N \isom R/\langle q_1(x)\rangle \oplus R$.
+    So $R^2/N$ has infinite real dimension if $d(x) = 0$ since $R$ is infinite dimensional.
+    
+    If $d(x) \neq 0$, then $q_1(x) \neq 0$ and $q_2(x) \neq 0$. In this case, 
+    $R^2/N$ must be finite dimensional since $R/\langle q_1(x)\rangle$ and $R/\langle q_2(x)$
+    are spanned by monomials $1,x,x^2,\ldots,x^n$ for $n\leq \deg(q_1)$ and $n\leq \deg(q_2)$ respectively.
+    
+    Hence $R^2/N$ is infinite dimensional if and only if $d(x) = 0$.     
+    
+    If $R/\langle q_1(x)\rangle$ is finite dimensional, then it has real dimension $\deg(q_1)$
+    since if $f(x) \in R$, then $f(x) = q(x)q_1(x) + r(x)$, where $\deg(r) < \deg(q_1)$, so 
+    $r$ is a linear combination of $1,x,x^2,\ldots,x^n$ for $n < \deg(q_1)$. Hence these
+    are $\deg(q_1)$ linearly independent spanning elements of $R/\langle q_1(x)\rangle$. 
+    
+    Similarly, if $R/\langle q_2(x)\rangle$ is finite dimensional, then it has real
+    dimension $\deg(q_2)$.
+    
+    Hence, if $R^2/N$ has finite real dimension, 
+    \begin{equation*}
+        \dim_\Rl(R^2/N) = \deg(q_1)\deg(q_2) = \deg(d).
+    \end{equation*}
+\end{proof}
+
+\section*{Question 2}
+In this question, we consider the algebra $A = \Ft G$ where $G = \langle \sigma\rangle$
+is the cyclic group of order $4$. We use the isomorphism,
+\begin{equation*}
+    A\isom \frac{\Ft[x]}{\langle x^4-1\rangle}, \sigma\mapsto x
+\end{equation*}
+Note that $x^4-1 = (x-1)(x+1)(x^2+1)$. This is a decomposition into prime factors,
+since $x-1$ and $x+1$ are degree $1$, therefore prime and if $x^2+1$ has a proper factor,
+then it has a linear factor. If $x^2+1$ has a linear factor, it has a root over $\Ft$. However
+for $x \in \Ft$, $x^2+1\neq 0$.
+
+\begin{lemma}
+    The maximal ideals of $A$ are exactly
+    \begin{align*}
+        &\langle \sigma-1\rangle\\
+        &\langle \sigma+1\rangle\\
+        &\langle \sigma^2+1\rangle.
+    \end{align*}
+\end{lemma}
+\begin{proof}
+    
+\end{proof}
+
     
 \end{document}
