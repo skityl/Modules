@@ -118,12 +118,12 @@ Let $R = \Rl[x]$.
             0 & q_2(x)
         \end{pmatrix}
     \end{equation*}
-    where $\det(\Phi_l) = \det(\Phi_r) = 1$ and $q_1|q_2$. So,
+    where $\det(\Phi_l),\det(\Phi_r) \neq 0$ and $q_1|q_2$. So,
     \begin{equation*}
         d(x) = \det\begin{pmatrix}
             p_1(x) & p_3(x)\\
             p_2(x) & p_4(x)
-        \end{pmatrix} = q_1(x)q_2(x)
+        \end{pmatrix} = \det(\Phi_l)^{-1}\det(\Phi_r)^{-1}q_1(x)q_2(x)
     \end{equation*}
     and
     \begin{equation*}
@@ -217,7 +217,7 @@ for $x \in \Ft$, $x^2+1\neq 0$.
     The Wedderburn decomposition in theorem \ref{extWeddDecomp} corresponds to
     an isomorphism
     \begin{equation*}
-        \frac{\Ft[x]}{\langle x-1\rangle}\times\frac{\Ft[x]}{\langle x+1\rangle}\times\frac{\Ft[x]}{\langle x^2+1}\isom \frac{\Ft[x]}{\langle x^4-1\rangle}
+        \frac{\Ft[x]}{\langle x-1\rangle}\times\frac{\Ft[x]}{\langle x+1\rangle}\times\frac{\Ft[x]}{\langle x^2+1\rangle}\isom \frac{\Ft[x]}{\langle x^4-1\rangle}
     \end{equation*}
     given by
     \begin{equation*}
@@ -346,8 +346,20 @@ for $x \in \Ft$, $x^2+1\neq 0$.
     are coprime.
 \end{remark}
 
+\begin{corollary}
+    Hence the isotypic components of $V$ are
+    \begin{equation*}
+        \Ft\begin{pmatrix}
+        
+        \end{pmatrix},\;\;\Ft\begin{pmatrix}  \end{pmatrix}\oplus\Ft\begin{pmatrix} \end{pmatrix},\;\;0.
+    \end{equation*}
+\end{corollary}
+\begin{proof}
+    
+\end{proof}
+
 \section*{Question 3}
-For this question, $G = \langle \sigma,\tau\;|\;\sigma^3=1,\tau^2=1,\tau\sigma = \sigma^{-1}\tau\langle$,
+For this question, $G = \langle \sigma,\tau\;|\;\sigma^3=1,\tau^2=1,\tau\sigma = \sigma^{-1}\tau\rangle$,
 and $A = \Ft G$.
 
 \begin{theorem}
