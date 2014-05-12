@@ -28,7 +28,7 @@ Let $R = \Rl[x]$.
     \end{equation*} 
     Then
     \begin{equation*}
-        R^2/K = \frac{\Rl[x]}{\langle x \rangle}\oplus\frac{\Rl[x]}{\langle x^2\rangle}
+        R^2/K = \frac{\Rl[x]}{\langle x \rangle}\oplus\frac{\Rl[x]}{\langle x^2\rangle}\isom \Rl \oplus \frac{\Rl}{\langle x^2\rangle}
     \end{equation*}
 \end{lemma}
 \begin{proof}
@@ -158,10 +158,10 @@ Let $R = \Rl[x]$.
 In this question, we consider the algebra $A = \Ft G$ where $G = \langle \sigma\rangle$
 is the cyclic group of order $4$. We use the isomorphism,
 \begin{equation*}
-    A\isom \frac{\Ft[x]}{\langle x^4-1\rangle}, \sigma\mapsto x
+    A\isom \frac{\Ft[x]}{\langle x^4-1\rangle},\;\; \sigma\mapsto x
 \end{equation*}
 Note that $x^4-1 = (x-1)(x+1)(x^2+1)$. This is a decomposition into prime factors,
-since $x-1$ and $x+1$ are degree $1$, therefore prime and if $x^2+1$ has a proper factor,
+since $x-1$ and $x+1$ are degree $1$, and therefore prime, and if $x^2+1$ has a proper factor,
 then it has a linear factor. If $x^2+1$ has a linear factor, it has a root over $\Ft$. However
 for $x \in \Ft$, $x^2+1\neq 0$.
 
@@ -199,7 +199,7 @@ for $x \in \Ft$, $x^2+1\neq 0$.
     \end{equation*}
 \end{theorem}
 \begin{proof}
-    This follows from the chinese remainder theorem, since $A\isom \Ft[x]/\langle x^4-1\rangle$, and
+    This follows from the Chinese remainder theorem, since $A\isom \Ft[x]/\langle x^4-1\rangle$, and
     the ideals
     \begin{align*}
         &\langle x-1\rangle\\
@@ -221,13 +221,13 @@ for $x \in \Ft$, $x^2+1\neq 0$.
     \end{equation*}
     given by
     \begin{equation*}
-        (a(x),b(x),c(x))\mapsto a(x)(x+1)(x^2+1)+b(x)(x-1)(x^2+1)+c(x)(x-1)(x+1).
+        (a(x),b(x),c(x))\mapsto a(x)(x+1)(x^2+1)-b(x)(x-1)(x^2+1)+c(x)(x-1)(x+1).
     \end{equation*}
 \end{lemma}
 \begin{proof}
     The isomorphism
     \begin{equation*}
-        \frac{\Ft[x]}{\langle x^4-1\rangle} \rightarrow \frac{\Ft[x]}{\langle x-1\rangle}\times\frac{\Ft[x]}{\langle x+1\rangle}\times\frac{\Ft[x]}{\langle x^2+1}
+        \frac{\Ft[x]}{\langle x^4-1\rangle} \rightarrow \frac{\Ft[x]}{\langle x-1\rangle}\times\frac{\Ft[x]}{\langle x+1\rangle}\times\frac{\Ft[x]}{\langle x^2+1\rangle}
     \end{equation*}
     is given by
     \begin{equation*}
@@ -240,11 +240,11 @@ for $x \in \Ft$, $x^2+1\neq 0$.
     $e_1(x) + \langle x-1\rangle = 1+\langle x-1\rangle$. The only choice for $e_1(x)$
     is $(x+1)(x^2+1)$. 
     
-    Similarly, $e_2(x) = (x-1)(x^2+1)$ and $e_3(x) = (x-1)(x+1)$. 
+    Similarly, $e_2(x) = -(x-1)(x^2+1)$ and $e_3(x) = (x-1)(x+1)$. 
     
     Hence, the isomorphism
     \begin{equation*}
-        \frac{\Ft[x]}{\langle x-1\rangle}\times\frac{\Ft[x]}{\langle x+1\rangle}\times\frac{\Ft[x]}{\langle x^2+1}\rightarrow \frac{\Ft[x]}{\langle x^4-1\rangle}
+        \frac{\Ft[x]}{\langle x-1\rangle}\times\frac{\Ft[x]}{\langle x+1\rangle}\times\frac{\Ft[x]}{\langle x^2+1\rangle}\rightarrow \frac{\Ft[x]}{\langle x^4-1\rangle}
     \end{equation*}
     maps $(1,0,0)$ to $e_1(x)$, $(0,1,0)$ to $e_2(x)$ and $(0,0,1)$ to $e_3(x)$, and 
     so by $\Ft[x]$-linearity, the result follows.
@@ -255,7 +255,7 @@ for $x \in \Ft$, $x^2+1\neq 0$.
     of $G$ given by 
     \begin{equation*}
         \rho(\sigma) = \begin{pmatrix} 1 & 0 & 0\\ 
-            0 & 0 & -11\\
+            0 & 0 & -1\\
             -1 & 1 & 0
         \end{pmatrix}
     \end{equation*}
@@ -318,7 +318,9 @@ for $x \in \Ft$, $x^2+1\neq 0$.
         \im e_1(\rho(\sigma)) &= \ker e_2(\rho(\sigma))\cap\ker e_3(\rho(\sigma))\\
                               &= \ker (\rho(\sigma)-I)(\rho(\sigma)^2+I)\cap \ker (\rho(\sigma)-I)(\rho(\sigma)+I)
     \end{align*}
-    Clearly $\ker \rho(\sigma)-I \subset \ker (\rho(\sigma)-I)(\rho(\sigma)^2+I)\cap \ker (\rho(\sigma)-I)(\rho(\sigma)+I)$,
+    
+    
+    It is clear that $\ker \rho(\sigma)-I \subset \ker (\rho(\sigma)-I)(\rho(\sigma)^2+I)\cap \ker (\rho(\sigma)-I)(\rho(\sigma)+I)$,
     and the opposite inclusion holds because $I = \rho(\sigma)^2+I-\rho(\sigma)(\rho(\sigma)+I)$.
     
     Similarly,
@@ -383,7 +385,7 @@ for $x \in \Ft$, $x^2+1\neq 0$.
         \end{pmatrix}
         = \Ft\begin{pmatrix}
             0\\0\\1
-        \end{pmatrix}\oplus
+        \end{pmatrix}\oplus\Ft
         \begin{pmatrix}
             0\\1\\0
         \end{pmatrix}       
@@ -405,9 +407,15 @@ and $A = \Ft G$.
 \begin{proof}
         If $f:G\rightarrow \Ft^\times = \{1,-1\}$ is a one dimensional representation, it
         must have $f(\sigma) = 1$, since $f(\sigma)^3 = f(\sigma)^3 = 1$. 
-        Then we may choose $f(\tau) = 1$ or $f(\tau) = -1$, and this uniquely
+        Then we may choose $f(\tau) = 1$ or $f(\tau) = -1$. Since $\rho(\tau)^2 = (-1)^2 = 1$,
+        and $\rho(\tau)\rho(\sigma) = \rho(\sigma)^{-1}\rho(\tau)$, this uniquely
         determines the representation by the universal property of free groups.
+        
+        Hence there are exactly two one dimensional representations of $G$, given as above.
 \end{proof}
+
+Alternatively, we could have computed the abelianisation $G_{ab} = \langle\;\sigma,\tau|\tau^2 = \sigma^2 = 1,\;\tau\sigma =\sigma\tau\;\rangle$
+and found $\operatorname{Hom}_{\Itgr}(G_{ab},\Ft^\times)$.
 
 \begin{definition}
     The representation $\rho:G\rightarrow \operatorname{GL}_2(\Ft)$ is given by
@@ -426,7 +434,7 @@ and $A = \Ft G$.
 
 \begin{proposition}
 \label{notSemisimple}
-    $V$ is not semisimple.
+    $V$ is not semi-simple.
 \end{proposition}
 \begin{proof}
     Consider the subspace $\Ft v$, where
@@ -438,7 +446,7 @@ and $A = \Ft G$.
     $\Ft v$ is an $A$-submodule of $V$, since $\rho(\sigma)v = v$ and 
     $\rho(\tau)v = -v$.
     
-    If $V$ is semisimple, then $\Ft v$ must be a direct summand of $V$. Hence there
+    If $V$ is semi-simple, then $\Ft v$ must be a direct summand of $V$. Hence there
     is another submodule $\Ft u$ for some $u$ not parallel to $v$ such that
     $V = \Ft v+\Ft u$.
     
@@ -446,10 +454,10 @@ and $A = \Ft G$.
     of $\rho(\sigma)$. 
     
     However, the characteristic polynomial of $\rho(\sigma)$ is 
-    $cp_{\rho(\sigma)}(\lambda) = (\lambda-1)^2$, and $\ker \rho(\sigma)-I = \Ft v$.
+    $\operatorname{cp}_{\rho(\sigma)}(\lambda) = (\lambda-1)^2$, and $\ker \rho(\sigma)-I = \Ft v$.
     
     Hence $\rho(\sigma)$ has no eigenvectors other then $v$, and so $\Ft v$ cannot
-    be a direct summand of $V$. Hence $V$ is not semisimple.
+    be a direct summand of $V$. Hence $V$ is not semi-simple.
 \end{proof}
 
 \begin{proposition}
@@ -470,9 +478,9 @@ and $A = \Ft G$.
     $A$-submodule of $V$. So it is required to show that $0 < \Ft v < V$ is a composition
     series, by showing that the composition factors are simple.
     
-    Clearly
+    The $A$-modules
     \begin{equation*}
-        \Ft v/0, V/\Ft v
+        \Ft v/0,\;\; V/\Ft v
     \end{equation*}
     are simple, since they are one dimensional as vector spaces over $\Ft$, hence
     can have no nontrivial $A$-submodules. 
@@ -495,7 +503,7 @@ and $A = \Ft G$.
         +\Ft v
     \end{equation*} 
     for some $\alpha \in \Ft$
-    ince if $u+\Ft v$ is any coset of $\Ft v$, then we may find $\alpha \in \Ft$
+    since if $u+\Ft v$ is any coset of $\Ft v$, then we may find $\alpha \in \Ft$
     such that $u+\Ft v = \alpha(1,0)^\top +\Ft v$.
     
     Hence, for any $\alpha(1,0)^\top+\Ft v \in V/\Ft v$, we may compute
@@ -506,5 +514,9 @@ and $A = \Ft G$.
     So this corresponds to the trivial representation in theorem \ref{1dimreps}.  
     
 \end{proof}
+\begin{remark}
+    The composition factors in the above proposition are isomorphic to the simple $A$ modules
+    induced by the representations in theorem \ref{1dimreps} since they induce the same $G$-representation.
+\end{remark}    
     
 \end{document}
